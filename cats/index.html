@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+	<meta charset="UTF-8">
+	<title>Website design with fullscreen background video using html,css and jquery</title>
+	<style type="text/css">
+		*{
+			margin: 0;
+			padding: 0;
+			outline: none;
+			box-sizing: border-box;
+		}
+		body{
+			font-family: Roboto;
+			overflow-x: hidden;
+		}
+
+		header{
+			position: relative;
+			padding: 0 50px;
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			border-bottom: 1px solid rgb(255 255 255 / 0.5);
+			z-index: 9;
+		}
+		.logo{
+			float: left;
+		}
+		.menu ul li{
+			display: inline-block;
+			float: left;
+		}
+		.menu ul li a{
+			position: relative;
+			display: inline-block;
+			float: left;
+			color: #fff;
+			text-decoration: none;
+			text-transform: uppercase;
+			font-weight: 300;
+			padding: 30px 30px;
+			letter-spacing: 1.6px;
+			border-right: 1px solid rgb(255 255 255 / 0.5);
+			overflow: hidden;
+			transition: all ease 0.5s;
+		}
+		.menu ul li:last-child a{
+			border-right: 0px;
+		}
+		.content .btn-primary:after,
+		.menu ul li a:after{
+			position: absolute;
+			content: '';
+			width: 100%;
+			height: 100%;
+			top: 100%;
+			left: 0;
+			background-color: gainsboro;
+			transition: all ease 0.5s;
+		}
+		.content .btn-primary:hover,
+		.menu ul li a:hover{
+			background-color: #fff;
+			color: #000;
+		}
+		.content .btn-primary:hover:after,
+		.menu ul li a:hover:after{
+			top: -100%;
+		}
+		.toggle{
+			float: right;
+			width: 30px;
+			height: 30px;
+			transition: all ease 0.5s;
+		}
+		.toggle:hover{
+			transform: rotate(180deg);
+		}
+		.content{
+			padding: 100px 50px;
+			color: #fff;
+			max-width: 500px;
+		}
+		.content h1{
+			font-size: 114px;
+			font-weight: 900;
+			text-transform: uppercase;
+			line-height: 110px;
+			letter-spacing: 10px;
+		}
+		.content p{
+			line-height: 26px;
+			font-weight: 300;
+			padding: 15px 0 60px; 
+		}
+		.content .btn-primary{
+			position: relative;
+			overflow: hidden;
+			display: inline-block;
+			color: #fff;
+			text-transform: uppercase;
+			text-decoration: none;
+			font-weight: 400;
+			font-size: 16px;
+			letter-spacing: 1.6px;
+			border: 1px solid #fff;
+			padding: 20px 40px;
+			border-radius: 50px;
+			margin-right: 15px;
+			transition: all ease 0.5s;
+		}
+		.play-btn img{
+			position: absolute;
+		}
+		.pause-img{
+			display: none;
+		}
+
+
+		.bg-video{
+			position: absolute;
+			top: 0;
+			left: 0;
+			z-index: -1;
+			height: 100%;
+		}
+		.bg-video video{
+			width: 100%;
+			height: 100vh;
+			object-fit: cover;
+		}
+
+		.toggle-content{
+			position: fixed;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			background-color: #fff;
+			z-index: 1;
+			display: none;
+		}
+		.toggle-content-inner{
+			display: flex;
+			flex-wrap: wrap;
+		}
+		.toggle-content-inner img{
+			width: 33.33333%;
+			padding: 5px;
+			filter: brightness(.5);
+			transition: all ease 0.5s;
+		}
+		.toggle-content-inner img:hover{
+			filter: brightness(1);
+			transform: scale(.9);
+		}
+	</style>
+</head>
+<body>
+	
+<div class="wrapper">
+	<header>
+		<div class="logo">
+			<img src="images/logo.png" alt="">
+		</div>
+		<div class="menu">
+			<ul>
+				<li><a href="index.html">Home</a></li>
+				<li><a href="#">Click the toggle!</a></li>
+				
+				<li><a href="https://www.linkedin.com/in/shatakshi-singh-5b750b18b/">Contact</a></li>
+			</ul>
+		</div>
+		<div class="toggle">
+			<img src="images/toggle.png" alt="">
+		</div>
+	</header>
+
+	<div class="content">
+		<h1>Black Beauty</h1>
+		<p>This page displayes the Web-Design with full background video with toggle control.</p>
+		<div>
+			<a href="#" class="btn-primary">The Purr-fect site!</a>
+			<a href="javascript:void(0)" class="play-btn">
+				<img class="play-img" src="images/play.png" alt="" style="">
+				<img class="pause-img" src="images/pause.png" alt="" style="display: none;">
+			</a>
+		</div>
+	</div>
+	
+	<div class="bg-video">
+		<video id="bg-video" autoplay="" muted="" poster="images/overlay.png">
+			<source src="video.mp4" type="">
+		</video>
+	</div>
+	
+	<div class="toggle-content">
+		<div class="toggle-content-inner">
+			<img src="https://images.pexels.com/photos/1056251/pexels-photo-1056251.jpeg?auto=compress&amp;cs=tinysrgb&amp;dpr=1&amp;w=500" alt="">
+			<img src="https://images.pexels.com/photos/774731/pexels-photo-774731.jpeg?auto=compress&amp;cs=tinysrgb&amp;dpr=1&amp;w=500" alt="">
+			<img src="https://images.pexels.com/photos/1543793/pexels-photo-1543793.jpeg?auto=compress&amp;cs=tinysrgb&amp;dpr=1&amp;w=500" alt="">
+			<img src="https://images.pexels.com/photos/156934/pexels-photo-156934.jpeg?auto=compress&amp;cs=tinysrgb&amp;dpr=1&amp;w=500" alt="">
+			<img src="https://images.pexels.com/photos/236606/pexels-photo-236606.jpeg?auto=compress&amp;cs=tinysrgb&amp;dpr=1&amp;w=500" alt="">
+			<img src="https://images.pexels.com/photos/1323326/cat-pet-pussy-animal-1323326.jpeg?auto=compress&amp;cs=tinysrgb&amp;dpr=1&amp;w=500" alt="">
+		</div>
+	</div>
+</div>
+
+
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script type="text/javascript">
+	
+	$(document).ready(function(){
+		$(".play-btn .play-img").on('click', function(){
+			$(".play-btn .play-img").fadeOut();
+			$(".play-btn .pause-img").fadeIn();
+			$("#bg-video")[0].play();
+		});
+
+		$(".play-btn .pause-img").on('click', function(){
+			$(".play-btn .play-img").fadeIn();
+			$(".play-btn .pause-img").fadeOut();
+			$("#bg-video")[0].pause();
+		});
+
+		// when video is play
+		$("#bg-video")[0].onplay = function(){
+			$(".play-btn .play-img").fadeOut();
+			$(".play-btn .pause-img").fadeIn();
+		};
+
+		// and video is end
+		$("#bg-video")[0].onended = function(){
+			$(".play-btn .play-img").fadeIn();
+			$(".play-btn .pause-img").fadeOut();
+		};
+
+		$(".toggle").on('click', function(){
+			$(".toggle-content").slideToggle();
+		});
+	});
+
+
+</script>
+
+</body></html>
